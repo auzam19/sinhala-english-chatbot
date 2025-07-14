@@ -1,13 +1,10 @@
 from flask import Flask, request, jsonify, send_from_directory
-import json
-import os
+import json, os
 
 app = Flask(__name__, static_folder='')
 
-# Load phrases
 with open('english_phrases.json', 'r', encoding='utf-8') as f:
     english_phrases = json.load(f)
-
 with open('sinhala_phrases.json', 'r', encoding='utf-8') as f:
     sinhala_phrases = json.load(f)
 
@@ -19,15 +16,13 @@ def index():
 def chat():
     data = request.json
     language = data.get('language')
-    user_input = data.get('message', '').lower().strip()
-
+    msg = data.get('message', '').lower().strip()
     if language == 'english':
-        reply = english_phrases.get(user_input, "Sorry, I didn't understand that.")
+        reply = english_phrases.get(msg, "Sorry, I didn't understand that.")
     elif language == 'sinhala':
-        reply = sinhala_phrases.get(user_input, "මට ඒක තේරෙන්නේ නැහැ.")
+        reply = sinhala_phrases.get(msg, "මට ඒක තේරෙන්නේ නැහැ.")
     else:
         reply = "Please select a language first."
-
     return jsonify({'reply': reply})
 
 if __name__ == '__main__':
