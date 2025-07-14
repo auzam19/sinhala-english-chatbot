@@ -1,14 +1,19 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import json
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='')
 
-# Load phrases from JSON files
+# Load phrases
 with open('english_phrases.json', 'r', encoding='utf-8') as f:
     english_phrases = json.load(f)
 
 with open('sinhala_phrases.json', 'r', encoding='utf-8') as f:
     sinhala_phrases = json.load(f)
+
+@app.route('/')
+def index():
+    return send_from_directory('', 'index.html')
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -26,4 +31,5 @@ def chat():
     return jsonify({'reply': reply})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host='0.0.0.0', port=port)
