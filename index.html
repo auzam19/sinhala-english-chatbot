@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sinhala-English Chatbot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <h2>Sinhala-English Chatbot</h2>
+    <div id="language-select">
+      <button onclick="selectLanguage('english')">English</button>
+      <button onclick="selectLanguage('sinhala')">සිංහල</button>
+    </div>
+    <div id="chat-controls" style="display:none;">
+      <button onclick="changeLanguage()">Change Language</button>
+      <button onclick="clearChat()">Clear Chat</button>
+    </div>
+    <div id="chat-window"></div>
+    <div id="chat-input">
+      <input type="text" id="user-input" placeholder="Type your message here" />
+      <button onclick="sendMessage()">Send</button>
+      <button onclick="startListening()">🎤</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
